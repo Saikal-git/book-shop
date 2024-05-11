@@ -20,7 +20,7 @@ const CreateProduct = () => {
 
   const productCreate = () => {
     let newProduct = {
-      id: 1,
+      id: productAll.length ? productAll[productAll.length - 1].id + 1 : 1,
       url: productImg,
       name: productName,
       price: productPrice,
@@ -31,15 +31,13 @@ const CreateProduct = () => {
     setProductPrice("");
     setProductCategory("");
     setProductDescription("");
-    localStorage.setItem("product", JSON.stringify([...productAll, newProduct]))
+    localStorage.setItem(
+      "product",
+      JSON.stringify([...productAll, newProduct])
+    );
     setProductAll([...productAll, newProduct]);
   };
 
-  const addEnter = (e) => {
-    if (e.key === "Enter") {
-      productCreate();
-    }
-  };
   console.log(productAll, "pro");
   return (
     <div className="py-[70px]">
@@ -109,7 +107,11 @@ const CreateProduct = () => {
             <textarea
               onChange={(e) => setProductDescription(e.target.value)}
               value={productDescription}
-              onKeyDown={addEnter}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  productCreate();
+                }
+              }}
               name=""
               id=""
               cols="30"
@@ -119,7 +121,6 @@ const CreateProduct = () => {
             ></textarea>
             <button
               onClick={() => {
-                // nav(`/productcard`)
                 productCreate();
               }}
               className="w-full border-4 border-blue-900 rounded-[6px] text-[30px] py-[5px] font-bold text-blue-900"

@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import slider from "../../assets/img/homeImg.svg";
-import ProductCard from "../ProductCard";
 import { BookShopContext } from "../../context";
+import Products from "../Products";
+import Category from "../Components";
 
 const Home = () => {
   const { productAll } = useContext(BookShopContext);
@@ -13,16 +14,10 @@ const Home = () => {
             background: `url("${slider}") no-repeat center / cover`,
             minHeight: "70vh",
           }}
-        >
-          <div className="container">
-            <div className="relative">
-              <div className="absolute top-[500px] z-[-1]">
-                {productAll.map((el, idx) => (
-                  <ProductCard el={el} key={idx} />
-                ))}
-              </div>
-            </div>
-          </div>
+        ></div>
+        <div className="">
+          <Category />
+          <Products />
         </div>
       </div>
     </>

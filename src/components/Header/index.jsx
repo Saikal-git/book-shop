@@ -8,12 +8,21 @@ import Signin from "../Signin";
 import { BookShopContext } from "../../context";
 
 const Header = () => {
-  const { modal, setModal } = useContext(BookShopContext);
+  const { modal, setModal, admin, setAdmin } = useContext(BookShopContext);
+  console.log(admin);
+  // const admin1 = JSON.parse(localStorage.getItem("admin")) || [];
+
   return (
     <div className="bg-[#0a1869] py-[18px] sticky top-0 z-99">
       <div className="container">
         <div className="flex items-center justify-between">
-          <Link to={"/"}>
+          <Link
+            to={"/"}
+            onClick={() => {
+              setAdmin(true);
+              localStorage.setItem("admin", JSON.stringify(true));
+            }}
+          >
             <img src={logo} alt="img" />
           </Link>
           <div className="flex items-center gap-[30px]">
@@ -33,15 +42,17 @@ const Header = () => {
               </a>
               <h1 className="text-white text-xl">Корзина</h1>
             </div>
-            <div
-              onClick={() => setModal(!modal)}
-              className="flex items-center justify-center flex-col duration-[0.5s] hover:bg-[#ffffff30] rounded-[7px] p-[10px] cursor-pointer "
-            >
-              <a className="text-white text-[26px]">
-                <FaRegUserCircle />
-              </a>
-              <h1 className="text-white text-xl">Админ</h1>
-            </div>
+            {admin ? (
+              <div
+                onClick={() => setModal(!modal)}
+                className="flex items-center justify-center flex-col duration-[0.5s] hover:bg-[#ffffff30] rounded-[7px] p-[10px] cursor-pointer "
+              >
+                <a className="text-white text-[26px]">
+                  <FaRegUserCircle />
+                </a>
+                <h1 className="text-white text-xl">Админ</h1>
+              </div>
+            ) : null}
           </div>
         </div>
         {modal ? (

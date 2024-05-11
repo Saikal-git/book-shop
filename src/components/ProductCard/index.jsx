@@ -1,22 +1,31 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { MdOutlineShoppingCart } from "react-icons/md";
 
 const ProductCard = ({ el }) => {
-//   const { prod } = useParams();
   return (
-    <div>
-      <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <a href="#">
-          <img class="rounded-t-lg" src={el.url} alt="" />
-        </a>
-        <div class="p-5">
-          <a href="#">
-            <h1 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{el.price}</h1>
-            <h5 class="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">
-              {el.name} / {el.category}
-            </h5>
-            <h3>{el.description}</h3>
-          </a>
+    <div className="flex">
+      <div className="container">
+        <div className="">
+          <div className="w-[300px] h-[470px] border-2 border-black">
+            <Link to={`/productdetails/${el.id}`}>
+              <img
+                src={el.url}
+                alt="img"
+                width={300}
+                className="cursor-pointer"
+              />
+            </Link>
+            <div className="flex items-center justify-between mt-[15px] px-[20px]">
+              <h1 className="text-[25px] font-bold">{el.price}сом</h1>
+              <a className="text-[25px] font-bold">
+                <MdOutlineShoppingCart />
+              </a>
+            </div>
+            <h1 className="text-[20px] px-[20px]">
+              {el.name}/{el.category}
+            </h1>
+          </div>
         </div>
       </div>
     </div>
