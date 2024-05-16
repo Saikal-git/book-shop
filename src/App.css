@@ -9,8 +9,13 @@
 a {
   cursor: pointer;
 }
-button {
-  cursor: pointer;
+html {
+  scroll-behavior: smooth;
+}
+#header {
+  z-index: 100;
+  position: sticky;
+  top: 0;
 }
 .bg {
   position: absolute;

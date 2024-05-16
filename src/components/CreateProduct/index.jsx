@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
 import { BookShopContext } from "../../context";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CreateProduct = () => {
   const nav = useNavigate();
@@ -18,24 +20,46 @@ const CreateProduct = () => {
     reader.readAsDataURL(file);
   };
 
+  const errorMessage = (message) =>
+    toast.error(message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+
   const productCreate = () => {
-    let newProduct = {
-      id: productAll.length ? productAll[productAll.length - 1].id + 1 : 1,
-      url: productImg,
-      name: productName,
-      price: productPrice,
-      category: productCategory,
-      description: productDescription,
-    };
-    setProductName("");
-    setProductPrice("");
-    setProductCategory("");
-    setProductDescription("");
-    localStorage.setItem(
-      "product",
-      JSON.stringify([...productAll, newProduct])
-    );
-    setProductAll([...productAll, newProduct]);
+    if (
+      productName.trim() === "" ||
+      productCategory.trim() === "" ||
+      productPrice.trim() === "" ||
+      productDescription.trim() === ""
+    ) {
+      errorMessage("Заполните пустые поля!");
+    } else {
+      let newProduct = {
+        quantity: 1,
+        id: productAll.length ? productAll[productAll.length - 1].id + 1 : 1,
+        url: productImg,
+        name: productName,
+        price: productPrice,
+        category: productCategory,
+        description: productDescription, 
+      };
+      setProductName("");
+      setProductPrice("");
+      setProductCategory("");
+      setProductDescription("");
+      localStorage.setItem(
+        "products",
+        JSON.stringify([...productAll, newProduct])
+      );
+      setProductAll([...productAll, newProduct]);
+    }
   };
 
   console.log(productAll, "pro");
@@ -89,13 +113,16 @@ const CreateProduct = () => {
               className="text-[30px] py-[10px] w-full px-[20px] border-2 border-blue-900 rounded-[5px] placeholder:text-blue-900 text-blue-900"
             />
             <div className="flex items-center justify-between w-full">
-              <input
-                onChange={(e) => setProductCategory(e.target.value)}
-                value={productCategory}
-                type="text"
-                placeholder="Category"
+              <select
                 className="text-[30px] py-[10px] w-[50%] px-[20px] border-2 border-blue-900 rounded-[5px] placeholder:text-blue-900 text-blue-900"
-              />
+                onChange={(e) => setProductCategory(e.target.value)}
+              >
+                <option value="детектив">Category:</option>
+                <option value="детектив">детектив</option>
+                <option value="Фантастика">Фантастика</option>
+                <option value="Приключения">Приключения</option>
+                <option value="Научная">Научная</option>
+              </select>
               <input
                 onChange={(e) => setProductPrice(e.target.value)}
                 value={productPrice}
@@ -130,6 +157,7 @@ const CreateProduct = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

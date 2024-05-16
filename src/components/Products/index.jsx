@@ -7,6 +7,7 @@ const Products = () => {
   const [sort, setSort] = useState("");
 
   const sortProduct = () => {
+    localStorage.setItem("products", JSON.stringify(sortProduct));
     if (sort === "expensive") {
       setProductAll(productAll.sort((a, b) => a.price - b.price));
     } else if (sort === "cheap") {
@@ -17,7 +18,7 @@ const Products = () => {
     <div>
       <div className="container">
         <div className="py-[40px]">
-          <div className="flex items-center justify-between mb-[20px]">
+          <div className="flex items-center justify-between mb-[30px]">
             <h1 className="text-blue-900 text-4xl font-bold">
               Возможно, Вам понравится
             </h1>
@@ -34,7 +35,7 @@ const Products = () => {
             </select>
           </div>
 
-          <div className="flex items-center flex-wrap gap-[90px]">
+          <div className="flex items-center flex-wrap gap-[70px] mt-[50px]">
             {productAll.map((el, idx) => (
               <ProductCard el={el} key={idx} />
             ))}

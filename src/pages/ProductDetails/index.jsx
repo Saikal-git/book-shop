@@ -1,65 +1,65 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { BookShopContext } from "../../context";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ProductDetails = () => {
   const { title } = useParams();
-  const { productAll } = useContext(BookShopContext);
+  const nav = useNavigate();
+  const { details, basket, setBasket } = useContext(BookShopContext);
   const [mouse, setMouse] = useState(false);
-  let productDet = productAll.find((el) => el.id === +title);
-  // useEffect(() => {
-  //   if (productDet) {
-  //     localStorage.setItem("details", JSON.stringify(productDet));
-  //   }
-  // }, [productDet]);
+  // const someBasket = basket?.some((el) => el.id == title);
+  console.log(basket, "basket");
 
-  let { url, name, price, category, description } = productDet;
+  // const basketProduct = (data) => {
+  //   setBasket([...basket, data]);
+  //   localStorage.setItem("basket", JSON.stringify(data));
+  // };
+
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
+  let { url, name, price, category, description } = details;
   return (
     <div className="container">
-      <div className="flex items-start py-[50px] gap-[60px]  z-[-1] relative">
-        <img
-          src={productDet && productDet.url}
-          alt="img"
-          width={400}
-          className="w-[30%]"
-        />
+      <div className="flex items-start py-[50px] gap-[60px]  relative">
+        <img src={url} alt="img" width={400} className="w-[30%]" />
         <div className="flex items-start justify-between flex-col w-[70%] gap-[20px]">
-          <h1 className="">
-            <span className="text-[26px] font-bold">
-              {productDet && productDet.name}
-            </span>{" "}
-            ({productDet && productDet.category})
+          <h1 className="flex items-center gap-2 text-[20px]">
+            <span className="text-[40px] font-bold">{name}</span> ({category})
           </h1>
 
           <p
             onMouseOver={() => setMouse(true)}
             onMouseOut={() => setMouse(false)}
-            className="my-[30px] text-[24px] hover:cursor-pointer"
+            className="my-[30px] text-[24px]"
           >
-            <i>
-              {productDet && productDet.description.slice(0, 250) + "  ..."}
-            </i>
+            <i>{description?.slice(0, 250) + "  ..."}</i>
           </p>
 
-          <div className=" flex items-center justify-between gap-96">
-            <h1 className=" text-[24px] font-bold">
-              {productDet && productDet.price}сом
-            </h1>
-            <button className="py-[6px] px-[14px] border-2 duration-500 border-black hover:border-green-600 hover:text-green-600 cursor-pointer ">
+          <div className=" flex items-center justify-between gap-96 ">
+            <h1 className=" text-[40px] font-bold">{price}сом</h1>
+            <button
+              // onClick={() =>
+              //   someBasket ? nav(`/basket`) : basketProduct(details)
+              // }
+              className="py-[7px]  text-[20px] px-[15px] border-2 border-black hover:border-green-600 hover:text-green-600"
+            >
               купить сейчас
             </button>
           </div>
 
-          <div style={{
-            transition: "1s",
-            transform: mouse ? "translateY(-100px)" : "translateY(0px)",
-            opacity: mouse ? "1" : "0",
-          }}
-          className="w-[700px] bg-state-400 p-[30px] rounded-[30px]"
+          <div
+            style={{
+              cursor: "pointer",
+              transition: "1s",
+              transform: mouse ? "translateY(-100px)" : "translateY(0px)",
+              opacity: mouse ? "1" : "0",
+            }}
+            className="w-[700px] bg-gray-300 p-[30px] rounded-[30px] "
           >
             <p className="text-[20px] my-[30px]">
               {" "}
-              <i>"{productDet && productDet.description}"</i>
+              <i>"{description}"</i>
             </p>
           </div>
         </div>
