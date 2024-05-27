@@ -13,7 +13,7 @@ const Category = () => {
     <div className="mt-[50px]">
       <div className="container">
         <h1 className="text-[40px] text-blue-900 font-bold">Категории</h1>
-        <div className="flex items-center gap-[30px]">
+        <div className="flex items-center gap-[70px]">
           <UiComponents img={cat1} title={"детектив"} />
           <UiComponents img={cat2} title={"Фантастика"} />
           <UiComponents img={cat3} title={"Приключения"} />

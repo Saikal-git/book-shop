@@ -35,7 +35,7 @@ const Products = () => {
             </select>
           </div>
 
-          <div className="flex items-center flex-wrap gap-[70px] mt-[50px]">
+          <div className="flex items-center flex-wrap gap-[65px] mt-[50px]">
             {productAll.map((el, idx) => (
               <ProductCard el={el} key={idx} />
             ))}

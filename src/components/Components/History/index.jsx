@@ -20,7 +20,7 @@ const History = () => {
                     Product name
                   </th>
                   <th scope="col" class="px-6 py-3">
-                    Category
+                    Adress
                   </th>
                   <th scope="col" class="px-6 py-3">
                     Date

@@ -33,7 +33,7 @@ const ProductDetails = () => {
             onMouseOut={() => setMouse(false)}
             className="my-[30px] text-[24px]"
           >
-            <i>{description?.slice(0, 250) + "  ..."}</i>
+            <i>{description?.slice(0, 20) + "  ..."}</i>
           </p>
 
           <div className=" flex items-center justify-between gap-96 ">
@@ -57,9 +57,20 @@ const ProductDetails = () => {
             }}
             className="w-[700px] bg-gray-300 p-[30px] rounded-[30px] "
           >
-            <p className="text-[20px] my-[30px]">
-              {" "}
-              <i>"{description}"</i>
+            <p
+              style={{
+                width: "200px",
+              }}
+              className="text-[20px]   my-[30px]"
+            >
+              <i
+                style={{
+                  width: "200px",
+                }}
+                className="w-[100px]"
+              >
+                "{description}"
+              </i>
             </p>
           </div>
         </div>
