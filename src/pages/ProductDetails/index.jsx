@@ -55,19 +55,19 @@ const ProductDetails = () => {
               transform: mouse ? "translateY(-100px)" : "translateY(0px)",
               opacity: mouse ? "1" : "0",
             }}
-            className="w-[700px] bg-gray-300 p-[30px] rounded-[30px] "
+            className="w-[650px] bg-gray-300 p-[30px] rounded-[30px] "
           >
             <p
               style={{
-                width: "200px",
+                width: "600px",
               }}
               className="text-[20px]   my-[30px]"
             >
               <i
                 style={{
-                  width: "200px",
+                  width: "500px",
                 }}
-                className="w-[100px]"
+                className="w-[500px]"
               >
                 "{description}"
               </i>
